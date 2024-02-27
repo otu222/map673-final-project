@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title># of People over the age of 25 with a Graduate or Professional Degree</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,800;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Personal Stylesheet -->
+    <link 
+      rel="stylesheet" 
+      href="css/styles.css"
+    />
+    
+  </head>
+
+  <body>
+    <div id="mobile">
+      <div class="message">
+        This map is best viewed on a desktop or laptop computer. Click to
+        continue.
+      </div>
+    </div>
+    <div class="container-fluid">
+      <header class="row bg-dark text-white">
+        <div class="col">
+          <h1># of People over the age of 25 with a Graduate or Professional Degree</h1>
+        </div>
+      </header>
+
+      <section class="row">
+        <div class="col-md-8 col-lg-9 col-xl-10 order-md-2 px-0">
+          <div id="map"></div>
+        </div>
+        <aside
+          id="about"
+          class="col-md-4 col-lg-3 col-xl-2 order-md-1 text-white py-2 pl-3 bg-secondary overflow-auto"
+        >
+          <section>
+            <p class="py-2">
+              This map charts the percentage of the US population in a given county that are 25 years and older with a graduate or professional degree.
+            </p>
+            <p>This map is based on 2020 ACS 5-year US Census data.</p>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="row bg-dark text-white py-1 px-2 fixed-bottom">
+        <div class="col">
+          <ul class="list-unstyled">
+            <li>
+              Data source:
+              <a
+                href="https://www.census.gov/data/developers/guidance/api-user-guide.Overview.html"
+                >US Census Data API</a
+              >
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- legend is outside of container-fluid and will be dynamically added to map -->
+    <div class="bg-secondary py-2 px-3 ml-3 mt-3 text-white" id="legend"></div>
+
+    <!-- ui is outside of container-fluid and will be dynamically added to map -->
+    <div class="form-group mr-3 mt-3" id="dropdown-ui">
+      <select class="form-select bg-primary text-white"></select>
+    </div>
+
+    <!-- Add Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <!-- then Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+    <!-- then Simple Statistics -->
+    <script src="https://unpkg.com/simple-statistics@7.8.2/dist/simple-statistics.min.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+      if (L.Browser.mobile) {
+        const overlay = document.getElementById("mobile");
+        overlay.style.display = "block";
+        overlay.addEventListener("click", () => {
+          overlay.style.display = "none";
+          overlay.style.zIndex = "-1";
+        });
+        a.legend.options.position = "bottomleft";
+        a.map.zoomOptions = null;
+      }
+
+      createMap();
+      console.log(a);
+
+      function createMap() {
+        a.map.placed = L.map(a.map.div, a.map.options);
+        if (a.map.zoomOptions) {
+          L.control.zoom(a.map.zoomOptions).addTo(a.map.placed);
+        }
+
+        L.tileLayer(a.tiles.url, a.tiles.options).addTo(a.map.placed);
+        getCensus();
+      }
+
+      function getCensus() {
+        a.censusAPI = fetch(a.censusUrl).then(function (r) {
+          return r.json();
+        });
+        a.geometry = fetch(a.geojsons.counties).then(function (r) {
+          return r.json();
+        });
+        Promise.all([a.censusAPI, a.geometry])
+          .then(function (response) {
+            a.data.censusData = response[0];
+            a.data.geometryData = response[1];
+            for (let n of a.data.censusData) {
+              const countyFips = n[2] + n[3];
+              for (const m of a.data.geometryData.features) {
+                const geoid = m.properties.GEOID;
+                if (geoid == countyFips) {
+                  if (n[0] == "Fayette County, Kentucky") {
+                    console.log(n);
+                  }
+                  m.properties.census = {};
+                  m.properties.census.home = n[1];
+                  break;
+                }
+              }
+            }
+            drawMap();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+      function drawMap() {
+        a.layers.placed = L.geoJson(a.data.geometryData, {
+          style: function (feature) {
+            return a.map.styles.default;
+          },
+          onEachFeature: function (feature, layer) {
+            layer.on("mouseover", function () {
+              layer.setStyle(a.map.styles.mouseover).bringToFront();
+            });
+            layer.on("mouseout", function () {
+              layer.setStyle(a.map.styles.mouseout);
+            });
+          },
+          filter: function (feature) {
+            for (let i of a.data.censusData) {
+              if (feature.properties.STATEFP == i[2]) {
+                return true;
+              }
+            }
+          },
+        }).addTo(a.map.placed);
+        a.map.placed.fitBounds(a.layers.placed.getBounds(), a.map.fitOptions);
+        updateMap();
+        addLegend();
+      }
+
+      function updateMap() {
+        getClassBreaks();
+        const breaks = a.classes.breaks;
+        a.layers.placed.eachLayer(function (layer) {
+          const props = layer.feature.properties;
+          if (props.census) {
+            layer.setStyle({
+              fillColor: a.legend.getColor(
+                props.census.home,
+                breaks,
+                a.classes.number
+              ),
+            });
+            let tooltipInfo = a.map.tooltip(props["NAME"], props.census.home);
+            layer.bindTooltip(tooltipInfo, {
+              // sticky: true,
+            });
+          } else {
+            layer.setStyle({
+              fillColor: "#ccc",
+            });
+            layer.bindTooltip("No data", {
+              // sticky: true,
+            });
+          }
+        });
+        updateLegend();
+      }
+
+      function getClassBreaks() {
+        const values = [];
+        a.layers.placed.eachLayer(function (layer) {
+          if (layer.feature.properties) {
+            const props = layer.feature.properties;
+            if (props.census) {
+              values.push(Number(props.census.home));
+            }
+          }
+        });
+        const cluster = ss.ckmeans(values, a.classes.number);
+        const breaks = cluster.map(function (cluster) {
+          return [cluster[0], cluster.pop()];
+        });
+        a.classes.breaks = breaks;
+      }
+
+      function addLegend() {
+        const legendControl = L.control(a.legend.options);
+        legendControl.onAdd = function () {
+          const legend = L.DomUtil.get(a.legend.div);
+          L.DomEvent.disableScrollPropagation(legend);
+          L.DomEvent.disableClickPropagation(legend);
+          return legend;
+        };
+        legendControl.addTo(a.map.placed);
+      }
+
+      function updateLegend() {
+        const breaks = a.classes.breaks;
+        console.log(a.censusVar)
+        legend.innerHTML = `<h5>${a.censusVar}</h5>`;
+
+        for (let i = 0; i <= breaks.length - 1; i++) {
+          let color = a.legend.getColor(breaks[i][0], breaks, a.classes.number);
+          const classLabel = a.legend.makePercent(
+            breaks[i][0],
+            breaks[i][1],
+            color
+          );
+          legend.innerHTML += classLabel;
+        }
+      }
+
+      function addUi() {
+        a.buttons.dropdown.placed = document.querySelector(
+          a.buttons.dropdown.select
+        );
+        a.buttons.dropdown.placed.innerHTML = "";
+        for (let i = 1; i < a.variables.length; i++) {
+          let option = document.createElement("option");
+          option.textContent = a.variables[i].label;
+          option.value = a.variables[i].name;
+          if (a.variables[i].name == a.vars.aV) {
+            option.selected = true;
+          }
+          a.buttons.dropdown.placed.appendChild(option);
+        }
+        const selectControl = L.control(a.buttons.dropdown.options);
+        selectControl.onAdd = function () {
+          return L.DomUtil.get(a.buttons.dropdown.id);
+        };
+        selectControl.addTo(a.map.placed);
+        a.buttons.dropdown.placed.addEventListener("change", function (e) {
+          a.vars.aV = e.target.value;
+          updateMap();
+        });
+      }
+    </script>
+  </body>
+</html>

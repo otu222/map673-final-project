@@ -1,0 +1,188 @@
+body {
+margin: 0;
+padding: 0;
+background-color: #333;
+font-family: "Open sans", sans-serif;
+font-weight: 300;
+font-size: 100%;
+}
+
+h1 {
+font-weight: 900;
+font-size: calc(1.5rem + ((100vw – 400) / 400));
+color: "#2e2e2e";
+letter-spacing: 0.02em;
+margin: 5px 0;
+}
+
+h2 {
+font-weight: 500;
+font-size: 2.3em;
+letter-spacing: 0.04em;
+text-decoration: underline;
+margin: 5px 0;
+}
+
+h3 {
+font-size: 1.5em;
+margin-bottom: 5px;
+}
+
+p {
+font-size: 1.3em;
+margin-bottom: 5px;
+}
+
+a {
+color: #004a8b;
+font-weight: 400;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+ul {
+padding: 0px 20px 4px 20px;
+font-size: 1.1em;
+line-height: 1.2em;
+color: #63666a;
+}
+
+li {
+margin: 10px 0;
+}
+
+#map {
+height: calc(60vh);
+background: #3f3f3f;
+}
+
+header {
+padding: 1rem;
+}
+
+footer {
+height: 50px;
+background-color: #262527;
+font-size: 0.7rem;
+}
+
+aside {
+height: calc(40vh - 130px);
+}
+
+#legend {
+padding: 6px 8px;
+font-size: 1rem;
+border-radius: 5px;
+max-width: 200px;
+color: rgba(244, 244, 244, 0.8);
+border-radius: 5px;
+}
+
+#legend span {
+width: 20px;
+height: 20px;
+float: left;
+margin: 0 10px 4px 0;
+}
+
+#legend label {
+font-size: 0.9rem;
+}
+
+#legend label:after {
+content: "";
+display: block;
+clear: both;
+}
+
+.container-fluid {
+background-color: #333;
+}
+
+#dropdown-ui {
+appearance: none;
+outline: none;
+border: none;
+margin: 1rem;
+position: relative;
+overflow: hidden;
+}
+
+#mobile {
+display: none;
+height: 100%;
+width: 100%;
+position: fixed;
+top: 0;
+left: 0;
+background-color: #333;
+z-index: 5000;
+opacity: 0.9;
+}
+
+.message {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: #fff;
+font-size: 1.5rem;
+text-align: center;
+}
+
+/* Landscape devices all scenarios */
+@media (orientation: landscape) {
+aside {
+    display: block;
+    height: calc(100vh - 130px);
+}
+
+#map {
+    height: calc(100vh - 130px);
+}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+aside {
+    display: block;
+    height: calc(100vh - 130px);
+}
+
+#map {
+    height: calc(100vh - 130px);
+}
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+aside {
+    display: block;
+    height: calc(100vh - 160px);
+}
+
+#map {
+    height: calc(100vh - 160px);
+}
+
+footer {
+    height: 60px;
+    font-size: 1rem;
+}
+
+h1 {
+    font-size: 2.8em;
+}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+}
