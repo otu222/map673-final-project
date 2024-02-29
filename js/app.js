@@ -10,7 +10,6 @@ if (L.Browser.mobile) {
 }     
 
 createMap();
-// console.log(a);
 
 function createMap() {
     a.map.placed = L.map(a.map.div, a.map.options);
@@ -19,15 +18,11 @@ function createMap() {
     }
 
     L.tileLayer(a.tiles.url, a.tiles.options).addTo(a.map.placed);
+
     getCensus();
 }
 
 function getCensus() {
-    // this function pulls the data through an API request.
-    // need to do this with the rest of the datas (total 10 data)
-
-    // new function
-
     let censusPromises = [];
 
     for (let dataSet in a.censusData) {
@@ -48,21 +43,24 @@ function getCensus() {
                 a.censusData[a.variables[i]].jsonData = response[i];
             }
             a.geometryData = response[10];
+            
+            a.selectedVar = "gradeHSGrad";
 
-            for (let n of a.censusData["pop25"].jsonData) {
+            for (let n of a.censusData[a.selectedVar].jsonData) {
                 const countyFips = n[2] + n[3];
                 for (const m of a.geometryData.features) {
                     const geoid = m.properties.GEOID;
                     if (geoid == countyFips) {
-                        if (n[0] == "Fayette County, Kentucky") {
-                            console.log(n);
-                        }
+                        // if (n[0] == "Fayette County, Kentucky") {
+                        //     console.log(n);
+                        // }
                         m.properties.census = {};
                         m.properties.census.home = n[1];
                         break;
                     }
                 }
             }
+            
             drawMap();
         })
         .catch(function (error) {
@@ -73,25 +71,27 @@ function getCensus() {
 function drawMap() {
     a.layers.placed = L.geoJson(a.geometryData, {
         style: function (feature) {
-        return a.map.styles.default;
+            return a.map.styles.default;
         },
         onEachFeature: function (feature, layer) {
-        layer.on("mouseover", function () {
-            layer.setStyle(a.map.styles.mouseover).bringToFront();
-        });
-        layer.on("mouseout", function () {
-            layer.setStyle(a.map.styles.mouseout);
-        });
+            layer.on("mouseover", function () {
+                layer.setStyle(a.map.styles.mouseover).bringToFront();
+            });
+            layer.on("mouseout", function () {
+                layer.setStyle(a.map.styles.mouseout);
+            });
         },
         filter: function (feature) {
-        for (let i of a.censusData["pop25"].jsonData) {
-            if (feature.properties.STATEFP == i[2]) {
-                return true;
+            for (let i of a.censusData[a.selectedVar].jsonData) {
+                if (feature.properties.STATEFP == i[2]) {
+                    return true;
+                }
             }
-        }
         },
     }).addTo(a.map.placed);
+
     a.map.placed.fitBounds(a.layers.placed.getBounds(), a.map.fitOptions);
+
     updateMap();
     addLegend();
     addUi();
@@ -100,27 +100,28 @@ function drawMap() {
 function updateMap() {
     getClassBreaks();
     const breaks = a.classes.breaks;
+
     a.layers.placed.eachLayer(function (layer) {
         const props = layer.feature.properties;
         if (props.census) {
-        layer.setStyle({
-            fillColor: a.legend.getColor(
-            props.census.home,
-            breaks,
-            a.classes.number
-            ),
-        });
-        let tooltipInfo = a.map.tooltip(props["NAME"], props.census.home);
-        layer.bindTooltip(tooltipInfo, {
-            // sticky: true,
-        });
+            layer.setStyle({
+                fillColor: a.legend.getColor(
+                props.census.home,
+                breaks,
+                a.classes.number
+                ),
+            });
+            let tooltipInfo = a.censusData[a.selectedVar].popupText(props["NAME"], props.census.home);
+            layer.bindTooltip(tooltipInfo, {
+                // sticky: true,
+            });
         } else {
-        layer.setStyle({
-            fillColor: "#ccc",
-        });
-        layer.bindTooltip("No data", {
-            // sticky: true,
-        });
+            layer.setStyle({
+                fillColor: "#ccc",
+            });
+            layer.bindTooltip("No data", {
+                // sticky: true,
+            });
         }
     });
     updateLegend();
@@ -130,10 +131,10 @@ function getClassBreaks() {
     const values = [];
     a.layers.placed.eachLayer(function (layer) {
         if (layer.feature.properties) {
-        const props = layer.feature.properties;
-        if (props.census) {
-            values.push(Number(props.census.home));
-        }
+            const props = layer.feature.properties;
+            if (props.census) {
+                values.push(Number(props.census.home));
+            }
         }
     });
     const cluster = ss.ckmeans(values, a.classes.number);
@@ -156,14 +157,14 @@ function addLegend() {
 
 function updateLegend() {
     const breaks = a.classes.breaks;
-    legend.innerHTML = `<h5>${a.censusVar}</h5>`;
+    legend.innerHTML = `<h5>${a.censusData[a.selectedVar].legendLabel}</h5>`;
 
     for (let i = 0; i <= breaks.length - 1; i++) {
         let color = a.legend.getColor(breaks[i][0], breaks, a.classes.number);
         const classLabel = a.legend.makePercent(
-        breaks[i][0],
-        breaks[i][1],
-        color
+            breaks[i][0],
+            breaks[i][1],
+            color
         );
         legend.innerHTML += classLabel;
     }
@@ -174,13 +175,13 @@ function addUi() {
         a.buttons.dropdown.select
     );
     a.buttons.dropdown.placed.innerHTML = "";
-    for (let i = 1; i < a.variables.length; i++) {
+    for (let i = 0; i < a.variables.length; i++) {
         let option = document.createElement("option");
         option.textContent = a.censusData[a.variables[i]].legendLabel;
         option.value = a.variables[i];
-        // if (a.variables[i].name == a.vars.aV) {
-        //     option.selected = true;
-        // }
+        if (a.variables[i] == a.selectedVar) {
+            option.selected = true;
+        }
         a.buttons.dropdown.placed.appendChild(option);
     }
     const selectControl = L.control(a.buttons.dropdown.options);
@@ -189,7 +190,22 @@ function addUi() {
     };
     selectControl.addTo(a.map.placed);
     a.buttons.dropdown.placed.addEventListener("change", function (e) {
-        // a.vars.aV = e.target.value;
+        a.selectedVar = e.target.value;
+        console.log(a.selectedVar)
+        for (let n of a.censusData[a.selectedVar].jsonData) {
+            const countyFips = n[2] + n[3];
+            for (const m of a.geometryData.features) {
+                const geoid = m.properties.GEOID;
+                if (geoid == countyFips) {
+                    // if (n[0] == "Fayette County, Kentucky") {
+                    //     console.log(n);
+                    // }
+                    m.properties.census = {};
+                    m.properties.census.home = n[1];
+                    break;
+                }
+            }
+        }
         updateMap();
     });
 }

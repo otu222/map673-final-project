@@ -5,7 +5,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Population 25 years and over",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     Population at or over the age of 25: ${a}`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeLess9: {
@@ -13,7 +17,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Less than 9th grade",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with less than a 9th grade education.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         grade9to12: {
@@ -21,7 +29,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "9th to 12th grade, no diploma",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with a 9th to 12th grade education, but no diploma.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeHSGrad: {
@@ -29,7 +41,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate (includes equivalency)",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with a High School Graduate diploma (includes equivalency).`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeSomeCollege: {
@@ -37,7 +53,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Some college, no degree",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with some college but no degree.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeAssociates: {
@@ -45,7 +65,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Associate's degree",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with an Associate's degree.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeBachelors: {
@@ -53,7 +77,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with a Bachelor's degree.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         gradeGradOrPro: {
@@ -61,7 +89,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Graduate or professional degree",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 with a Graduate or Professional degree.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         certHSGrad: {
@@ -69,7 +101,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate or higher",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 that are a High school graduate or higher.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         },
         certBachelors: {
@@ -77,7 +113,11 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree or higher",
-            popupText : "",
+            popupText : function (name, a) {
+                const tooltipInfo = `<b>${name} County </b></br>
+                                     ${a}% of people at or over the age of 25 that are a Bachelor's degree or higher.`;
+                return tooltipInfo;
+            },
             sideMenuText : "",
         }
     },
