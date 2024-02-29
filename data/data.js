@@ -2,6 +2,30 @@ const a = {
     data: {},
     layers: {},
     censusUrl: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0066PE&for=county:*&in=state:*",
+    censusURLs: {
+        population25: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0059PE&for=county:*&in=state:*",
+        gradeLessThan9th: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0060PE&for=county:*&in=state:*",
+        grade9thto12th: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0061PE&for=county:*&in=state:*",
+        gradeHighSchoolGrad: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0062PE&for=county:*&in=state:*",
+        gradeSomeCollegeNoDegree: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0063PE&for=county:*&in=state:*",
+        gradeAssociates: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0064PE&for=county:*&in=state:*",
+        gradeBachelors: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0065PE&for=county:*&in=state:*",
+        gradeGradOrPro: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0066PE&for=county:*&in=state:*",
+        certHighSchoolGrad: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0067PE&for=county:*&in=state:*",
+        certBachelors: "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0068PE&for=county:*&in=state:*",
+    },
+    allCensusAPIs: {
+        population25: {},
+        gradeLessThan9th: {},
+        grade9thto12th: {},
+        gradeHighSchoolGrad: {},
+        gradeSomeCollegeNoDegree: {},
+        gradeAssociates: {},
+        gradeBachelors: {},
+        gradeGradOrPro: {},
+        certHighSchoolGrad: {},
+        certBachelors: {},
+    },
     censusVar: "Graduate or Professional Degree",
     geojsons: {
         counties: "https://newmapsplus.github.io/assets/data/census2020/us-counties-100m.json",
@@ -82,6 +106,6 @@ const a = {
         },
     },
     classes: {
-        number: 5,
+        number: 7,
     },
 };
