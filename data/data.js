@@ -202,6 +202,10 @@ const a = {
             }
         },
     },
+    sideText: {
+        section: "sideText-Stuff",
+        content: ``,
+    },
     classes: {
         number: 7,
     },

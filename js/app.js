@@ -44,22 +44,39 @@ function getCensus() {
             }
             a.geometryData = response[10];
             
-            a.selectedVar = "gradeHSGrad";
+            a.selectedVar = "pop25";
 
-            for (let n of a.censusData[a.selectedVar].jsonData) {
-                const countyFips = n[2] + n[3];
-                for (const m of a.geometryData.features) {
-                    const geoid = m.properties.GEOID;
-                    if (geoid == countyFips) {
-                        // if (n[0] == "Fayette County, Kentucky") {
-                        //     console.log(n);
-                        // }
-                        m.properties.census = {};
-                        m.properties.census.home = n[1];
-                        break;
+            for (const m of a.geometryData.features) {
+                let geoid = m.properties.GEOID;
+                m.properties.census = [];
+
+                a.variables.forEach((v) => {
+                    for (let n of a.censusData[v].jsonData) {
+                        let countyFips = n[2] + n[3];
+                        if (geoid == countyFips) {
+                            m.properties.census[v] = n[1];
+                            break;
+                        }
                     }
-                }
+                });
+                
+                console.log(m);
             }
+
+            // for (let n of a.censusData[a.selectedVar].jsonData) {
+            //     const countyFips = n[2] + n[3];
+            //     for (const m of a.geometryData.features) {
+            //         const geoid = m.properties.GEOID;
+            //         if (geoid == countyFips) {
+            //             // if (n[0] == "Fayette County, Kentucky") {
+            //             //     console.log(n);
+            //             // }
+            //             m.properties.census = {};
+            //             m.properties.census.home = n[1];
+            //             break;
+            //         }
+            //     }
+            // }
             
             drawMap();
         })
@@ -80,6 +97,10 @@ function drawMap() {
             layer.on("mouseout", function () {
                 layer.setStyle(a.map.styles.mouseout);
             });
+            layer.on("click", function() {
+                console.log(feature);
+                updateSideText(feature);
+            })
         },
         filter: function (feature) {
             for (let i of a.censusData[a.selectedVar].jsonData) {
@@ -95,6 +116,7 @@ function drawMap() {
     updateMap();
     addLegend();
     addUi();
+    addSideText();
 }
 
 function updateMap() {
@@ -106,12 +128,12 @@ function updateMap() {
         if (props.census) {
             layer.setStyle({
                 fillColor: a.legend.getColor(
-                props.census.home,
+                props.census[a.selectedVar],
                 breaks,
                 a.classes.number
                 ),
             });
-            let tooltipInfo = a.censusData[a.selectedVar].popupText(props["NAME"], props.census.home);
+            let tooltipInfo = a.censusData[a.selectedVar].popupText(props["NAME"], props.census[a.selectedVar]);
             layer.bindTooltip(tooltipInfo, {
                 // sticky: true,
             });
@@ -133,7 +155,7 @@ function getClassBreaks() {
         if (layer.feature.properties) {
             const props = layer.feature.properties;
             if (props.census) {
-                values.push(Number(props.census.home));
+                values.push(Number(props.census[a.selectedVar]));
             }
         }
     });
@@ -192,20 +214,29 @@ function addUi() {
     a.buttons.dropdown.placed.addEventListener("change", function (e) {
         a.selectedVar = e.target.value;
         console.log(a.selectedVar)
-        for (let n of a.censusData[a.selectedVar].jsonData) {
-            const countyFips = n[2] + n[3];
-            for (const m of a.geometryData.features) {
-                const geoid = m.properties.GEOID;
-                if (geoid == countyFips) {
-                    // if (n[0] == "Fayette County, Kentucky") {
-                    //     console.log(n);
-                    // }
-                    m.properties.census = {};
-                    m.properties.census.home = n[1];
-                    break;
-                }
-            }
-        }
+        // for (let n of a.censusData[a.selectedVar].jsonData) {
+        //     const countyFips = n[2] + n[3];
+        //     for (const m of a.geometryData.features) {
+        //         const geoid = m.properties.GEOID;
+        //         if (geoid == countyFips) {
+        //             // if (n[0] == "Fayette County, Kentucky") {
+        //             //     console.log(n);
+        //             // }
+        //             m.properties.census = {};
+        //             m.properties.census.home = n[1];
+        //             break;
+        //         }
+        //     }
+        // }
         updateMap();
     });
+}
+
+function addSideText() {
+    a.sideText.content = L.DomUtil.get(a.sideText.section);
+}
+
+function updateSideText(feature) {
+    console.log(`Clicked on : ${feature}`)
+    //a.sideText.content.innerHTML = `<p>Updated Stuff Stuff<p>`   
 }
