@@ -10,7 +10,14 @@ const a = {
                                      Population at or over the age of 25: ${a}`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Population at or over the age of 25</td>
+                    <td>${value}</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeLess9: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0060PE&for=county:*&in=state:*",
@@ -22,7 +29,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with less than a 9th grade education.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Less than a 9th grade education</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         grade9to12: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0061PE&for=county:*&in=state:*",
@@ -34,7 +48,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with a 9th to 12th grade education, but no diploma.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>9th to 12th grade education, but no diploma</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeHSGrad: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0062PE&for=county:*&in=state:*",
@@ -46,7 +67,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with a High School Graduate diploma (includes equivalency).`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>High School Graduate diploma (includes equivalency)</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeSomeCollege: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0063PE&for=county:*&in=state:*",
@@ -58,7 +86,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with some college but no degree.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Some college but no degree</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeAssociates: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0064PE&for=county:*&in=state:*",
@@ -70,7 +105,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with an Associate's degree.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Associate's degree</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeBachelors: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0065PE&for=county:*&in=state:*",
@@ -82,7 +124,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with a Bachelor's degree.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Bachelor's degree</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         gradeGradOrPro: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0066PE&for=county:*&in=state:*",
@@ -94,7 +143,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 with a Graduate or Professional degree.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Graduate or Professional degree</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         certHSGrad: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0067PE&for=county:*&in=state:*",
@@ -106,7 +162,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 that are a High school graduate or higher.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>High school graduate or higher</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         },
         certBachelors: {
             apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0068PE&for=county:*&in=state:*",
@@ -118,7 +181,14 @@ const a = {
                                      ${a}% of people at or over the age of 25 that are a Bachelor's degree or higher.`;
                 return tooltipInfo;
             },
-            sideMenuText : "",
+            sideMenuText : function (value) {
+                const tableRowInfo = 
+                `<tr>
+                    <td>Bachelor's degree or higher</td>
+                    <td>${value}%</td>
+                </tr>`;
+                return tableRowInfo;
+            },
         }
     },
     variables : [],

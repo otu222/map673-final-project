@@ -59,8 +59,6 @@ function getCensus() {
                         }
                     }
                 });
-                
-                console.log(m);
             }
 
             // for (let n of a.censusData[a.selectedVar].jsonData) {
@@ -98,7 +96,6 @@ function drawMap() {
                 layer.setStyle(a.map.styles.mouseout);
             });
             layer.on("click", function() {
-                console.log(feature);
                 updateSideText(feature);
             })
         },
@@ -214,20 +211,6 @@ function addUi() {
     a.buttons.dropdown.placed.addEventListener("change", function (e) {
         a.selectedVar = e.target.value;
         console.log(a.selectedVar)
-        // for (let n of a.censusData[a.selectedVar].jsonData) {
-        //     const countyFips = n[2] + n[3];
-        //     for (const m of a.geometryData.features) {
-        //         const geoid = m.properties.GEOID;
-        //         if (geoid == countyFips) {
-        //             // if (n[0] == "Fayette County, Kentucky") {
-        //             //     console.log(n);
-        //             // }
-        //             m.properties.census = {};
-        //             m.properties.census.home = n[1];
-        //             break;
-        //         }
-        //     }
-        // }
         updateMap();
     });
 }
@@ -237,6 +220,17 @@ function addSideText() {
 }
 
 function updateSideText(feature) {
-    console.log(`Clicked on : ${feature}`)
-    //a.sideText.content.innerHTML = `<p>Updated Stuff Stuff<p>`   
+    let sideTable = 
+    `<table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">${feature.properties.NAME} County</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    for (let v in feature.properties.census) {
+        sideTable += a.censusData[v].sideMenuText(feature.properties.census[v]);
+    }
+    sideTable += `</tbody></table>`
+    a.sideText.content.innerHTML = sideTable;
 }
