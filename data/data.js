@@ -195,11 +195,14 @@ const a = {
     layers: {},    
     geojsons: {
         counties: "https://newmapsplus.github.io/assets/data/census2020/us-counties-100m.json",
+        statelines: "us_states_6-precision_20m.geojson"
     },
     geometryData : {},
     map: {
         div: "map",
         options: {
+            center: [40, -100],
+            zoom: 6,
             zoomSnap: 1,
             zoomControl: false,
         },

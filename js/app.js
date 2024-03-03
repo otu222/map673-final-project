@@ -47,34 +47,26 @@ function getCensus() {
             a.selectedVar = "pop25";
 
             for (const m of a.geometryData.features) {
+                if (m.properties.STATEFP == "72") { 
+                    continue; 
+                }
+
                 let geoid = m.properties.GEOID;
                 m.properties.census = [];
 
                 a.variables.forEach((v) => {
                     for (let n of a.censusData[v].jsonData) {
+                        if (n[1] == null) { 
+                            continue; 
+                        }
                         let countyFips = n[2] + n[3];
                         if (geoid == countyFips) {
                             m.properties.census[v] = n[1];
-                            break;
+                            break;                            
                         }
                     }
                 });
             }
-
-            // for (let n of a.censusData[a.selectedVar].jsonData) {
-            //     const countyFips = n[2] + n[3];
-            //     for (const m of a.geometryData.features) {
-            //         const geoid = m.properties.GEOID;
-            //         if (geoid == countyFips) {
-            //             // if (n[0] == "Fayette County, Kentucky") {
-            //             //     console.log(n);
-            //             // }
-            //             m.properties.census = {};
-            //             m.properties.census.home = n[1];
-            //             break;
-            //         }
-            //     }
-            // }
             
             drawMap();
         })
@@ -108,7 +100,7 @@ function drawMap() {
         },
     }).addTo(a.map.placed);
 
-    a.map.placed.fitBounds(a.layers.placed.getBounds(), a.map.fitOptions);
+    // a.map.placed.fitBounds(a.layers.placed.getBounds(), a.map.fitOptions);
 
     updateMap();
     addLegend();
