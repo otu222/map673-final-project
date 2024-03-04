@@ -1,7 +1,7 @@
 const a = {
     censusData: {
         pop25: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0059PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0059PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Population 25 years and over",
@@ -21,7 +21,7 @@ const a = {
             },
         },
         gradeLess9: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0060PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0060PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Less than 9th grade",
@@ -41,7 +41,7 @@ const a = {
             },
         },
         grade9to12: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0061PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0061PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "9th to 12th grade, no diploma",
@@ -61,7 +61,7 @@ const a = {
             },
         },
         gradeHSGrad: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0062PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0062PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate (includes equivalency)",
@@ -81,7 +81,7 @@ const a = {
             },
         },
         gradeSomeCollege: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0063PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0063PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Some college, no degree",
@@ -101,7 +101,7 @@ const a = {
             },
         },
         gradeAssociates: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0064PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0064PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Associate's degree",
@@ -121,7 +121,7 @@ const a = {
             },
         },
         gradeBachelors: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0065PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0065PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree",
@@ -141,7 +141,7 @@ const a = {
             },
         },
         gradeGradOrPro: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0066PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0066PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Graduate or professional degree",
@@ -161,7 +161,7 @@ const a = {
             },
         },
         certHSGrad: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0067PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0067PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate or higher",
@@ -181,7 +181,7 @@ const a = {
             },
         },
         certBachelors: {
-            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0068PE&for=county:*&in=state:*",
+            apiURL : "https://api.census.gov/data/2020/acs/acs5/profile?get=NAME,DP02_0068PE&for=county:*&in=state:*&key=04363a990a00ff0ff6fb4727dfa0e3f9e9eb3f2b",
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree or higher",
