@@ -5,9 +5,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Population 25 years and over",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     Population at or over the age of 25: ${a}`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p>Population at or over the age of 25: <b class="text-primary">${((Number)(a)).toLocaleString()}</b></p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -24,9 +25,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Less than 9th grade",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with less than a 9th grade education.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25<br/>with less than a 9th grade education.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -43,9 +45,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "9th to 12th grade, no diploma",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with a 9th to 12th grade education, but no diploma.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with a 9th to 12th grade education, but no diploma.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -62,9 +65,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate (includes equivalency)",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with a High School Graduate diploma (includes equivalency).`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with a High School Graduate diploma<br/>(includes equivalency).</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -81,9 +85,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Some college, no degree",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with some college but no degree.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with some college but no degree.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -100,9 +105,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Associate's degree",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with an Associate's degree.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with an Associate's degree.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -119,9 +125,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with a Bachelor's degree.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with a Bachelor's degree.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -138,9 +145,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Graduate or professional degree",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 with a Graduate or Professional degree.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>with a Graduate or Professional degree.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -157,9 +165,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "High school graduate or higher",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 that are a High school graduate or higher.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>that are a High school graduate or higher.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -176,9 +185,10 @@ const a = {
             censusResponse : {},
             jsonData : {},
             legendLabel : "Bachelor's degree or higher",
-            popupText : function (name, a) {
-                const tooltipInfo = `<b>${name} County </b></br>
-                                     ${a}% of people at or over the age of 25 that are a Bachelor's degree or higher.`;
+            popupText : function (name, state, a) {
+                const tooltipInfo = 
+                `<h3><b>${name} County, ${state} </b><h3>
+                <p><b class="text-primary">${a}%</b> of people at or over the age of 25 <br/>that are a Bachelor's degree or higher.</p>`;
                 return tooltipInfo;
             },
             sideMenuText : function (value) {
@@ -195,9 +205,64 @@ const a = {
     layers: {},    
     geojsons: {
         counties: "https://newmapsplus.github.io/assets/data/census2020/us-counties-100m.json",
-        statelines: "us_states_6-precision_20m.geojson"
+        statelines: "data/us_states_6-precision_20m.geojson"
     },
     geometryData : {},
+    stateCodes : {
+        "01":"Alabama",
+        "02":"Alaska",
+        "04":"Arizona",
+        "05":"Arkansas",
+        "06":"California",
+        "08":"Colorado",
+        "09":"Connecticut",
+        "10":"Delaware",
+        "11":"District Of Columbia",
+        "12":"Florida",
+        "13":"Georgia",
+        "15":"Hawaii",
+        "16":"Idaho",
+        "17":"Illinois",
+        "18":"Indiana",
+        "19":"Iowa",
+        "20":"Kansas",
+        "21":"Kentucky",
+        "22":"Louisiana",
+        "23":"Maine",
+        "24":"Maryland",
+        "25":"Massachusetts",
+        "26":"Michigan",
+        "27":"Minnesota",
+        "28":"Mississippi",
+        "29":"Missouri",
+        '30':"Montana",
+        "31":"Nebraska",
+        "32":"Nevada",
+        "33":"New Hampshire",
+        "34":"New Jersey",
+        "35":"New Mexico",
+        "36":"New York",
+        "37":"North Carolina",
+        "38":"North Dakota",
+        "39":"Ohio",
+        "40":"Oklahoma",
+        "41":"Oregon",
+        "42":"Pennsylvania",
+        "44":"Rhode Island",
+        "45":"South Carolina",
+        "46":"South Dakota",
+        "47":"Tennessee",
+        "48":"Texas",
+        "49":"Utah",
+        "50":"Vermont",
+        "51":"Virginia",
+        "53":"Washington",
+        "54":"West Virginia",
+        "55":"Wisconsin",
+        "56":"Wyoming",
+        "72":"Puerto Rico",
+        "78":"Virgin Islands",
+    },
     map: {
         div: "map",
         options: {
@@ -206,15 +271,10 @@ const a = {
             zoomSnap: 1,
             zoomControl: false,
         },
-        tooltip: function (name, a) {
-            const tooltipInfo = `<b>${name} County </b></br>
-                                 ${a}% of people over the age of 25 with a graduate or professional degree.`;
-            return tooltipInfo;
-        },
         styles: {
             default: {
                 color: "#20282e",
-                weight: 2,
+                weight: 1.5,
                 fillOpacity: 1,
                 fillColor: "#1f78b4",
             },
@@ -257,10 +317,18 @@ const a = {
             5: ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"],
             7: ['#ffffe0', '#b9e5dd', '#93c4d2', '#73a2c6', '#5681b9', '#3761ab', '#00429d']
         },
-        makePercent: function (a, b, color) {
-            const classLabel = `<div><span style ="background: ${color}"></span>
+        makePercent: function (a, b, color, v) {
+            var classLabel = ``;
+            if ( v == "pop25" ) {
+                classLabel = `<div><span style ="background: ${color}"></span>
+                                <label>${a.toLocaleString()} &mdash;
+                                ${b.toLocaleString()}</label></div>`;
+            }
+            else {
+                classLabel = `<div><span style ="background: ${color}"></span>
                                 <label>${a} &mdash;
                                 ${b}%</label></div>`;
+            }
             return classLabel;
         },
         options: {

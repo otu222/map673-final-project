@@ -35,6 +35,7 @@ function getCensus() {
     a.geometry = fetch(a.geojsons.counties).then(function (r) {
         return r.json();
     });
+    
     censusPromises.push(a.geometry);
     
     Promise.all(censusPromises)
@@ -117,12 +118,12 @@ function updateMap() {
         if (props.census) {
             layer.setStyle({
                 fillColor: a.legend.getColor(
-                props.census[a.selectedVar],
-                breaks,
-                a.classes.number
+                    props.census[a.selectedVar],
+                    breaks,
+                    a.classes.number
                 ),
             });
-            let tooltipInfo = a.censusData[a.selectedVar].popupText(props["NAME"], props.census[a.selectedVar]);
+            let tooltipInfo = a.censusData[a.selectedVar].popupText(props["NAME"], a.stateCodes[props["STATEFP"]], props.census[a.selectedVar]);
             layer.bindTooltip(tooltipInfo, {
                 // sticky: true,
             });
@@ -175,7 +176,8 @@ function updateLegend() {
         const classLabel = a.legend.makePercent(
             breaks[i][0],
             breaks[i][1],
-            color
+            color,
+            a.selectedVar
         );
         legend.innerHTML += classLabel;
     }
@@ -213,10 +215,10 @@ function addSideText() {
 
 function updateSideText(feature) {
     let sideTable = 
-    `<table class="table">
+    `<table class="table bg-white table-bordered">
         <thead>
             <tr>
-                <th colspan="2">${feature.properties.NAME} County</th>
+                <th colspan="2">${feature.properties.NAME} County, ${a.stateCodes[feature.properties.STATEFP]}</th>
             </tr>
         </thead>
         <tbody>`;
