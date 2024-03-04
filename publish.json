@@ -1,7 +1,7 @@
 {
-    "title": "Title of Project",
-    "info": "Add info about project",
+    "title": "Percentage of the US Populas Over the Age of 25 with Varying Levels of Education by County",
+    "info": "This map charts the percentage of the US population in a given county that are 25 years and older with varying levels of education.",
     "coordinates": [38, -84.5],
-    "author": "Do you want to add your name?",
-    "link": "http://newmapsplus.uky.edu"
+    "author": "Orest Tuz",
+    "link": "https://otu222.github.io/map673-final-project/"
 }

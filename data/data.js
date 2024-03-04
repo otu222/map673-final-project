@@ -15,7 +15,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Population at or over the age of 25</td>
-                    <td>${value}</td>
+                    <td>${((Number)(value)).toLocaleString()}</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -35,7 +35,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Less than a 9th grade education</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -55,7 +55,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>9th to 12th grade education, but no diploma</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -75,7 +75,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>High School Graduate diploma (includes equivalency)</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -95,7 +95,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Some college but no degree</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -115,7 +115,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Associate's degree</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -135,7 +135,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Bachelor's degree</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -155,7 +155,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Graduate or Professional degree</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -175,7 +175,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>High school graduate or higher</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
@@ -195,7 +195,7 @@ const a = {
                 const tableRowInfo = 
                 `<tr>
                     <td>Bachelor's degree or higher</td>
-                    <td>${value}%</td>
+                    <td>${((Number)(value)).toLocaleString()}%</td>
                 </tr>`;
                 return tableRowInfo;
             },
